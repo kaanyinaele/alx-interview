@@ -1,17 +1,19 @@
 #!/usr/bin/python3
-"""
-0-main
-"""
-pascal_triangle = __import__('0-pascal_triangle').pascal_triangle
+def pascal_triangle(n):
+    if n <= 0:
+        return []
 
-def print_triangle(triangle):
-    """
-    Print the triangle
-    """
-    for row in triangle:
-        print("[{}]".format(",".join([str(x) for x in row])))
-
-
-if __name__ == "__main__":
-    print_triangle(pascal_triangle(5))
+    triangle = []
+    
+    for i in range(n):
+        # Start each row with 1
+        row = [1] * (i + 1)
+        
+        # Each triangle row (except the first and last element) is the sum of the two above it
+        for j in range(1, i):
+            row[j] = triangle[i - 1][j - 1] + triangle[i - 1][j]
+        
+        triangle.append(row)
+    
+    return triangle
 
